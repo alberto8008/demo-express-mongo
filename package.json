@@ -6,8 +6,7 @@
   "type": "module",
   "scripts": {
     "backend": "nodemon backend/index.js",
-    "frontend": "npm run start --prefix frontend",
-    "dev": "concurrently \"npm run frontend\" \"npm run backend"
+    "dev": "npm run backend"
   },
   "keywords": [],
   "author": "Alberto Mendez",
