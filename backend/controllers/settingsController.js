@@ -17,7 +17,26 @@ export const getSettings = async (req, res) => {
 };
 
 export const setSettings = async (req, res) => {
-  const result = setSettingsById(req.body["id"], req.body["settings"]);
-  console.log("444444444444", await result);
-  res.send(result);
+  const { id, settings } = req.body;
+  if (!id || typeof id !== "string") {
+    return res.status(400).send({ message: "Invalid or missing ID" });
+  }
+  if (!settings || typeof settings !== "object") {
+    return res
+      .status(400)
+      .send({ message: "Invalid or missing settings data" });
+  }
+
+  try {
+    const result = await setSettingsById(id, settings);
+
+    if (!result) {
+      res.status(404).send({ message: "Settings not found" });
+    } else {
+      res.send(result);
+    }
+  } catch (error) {
+    console.error("Error setting settings:", error);
+    res.status(500).send({ message: "Internal Server Error" });
+  }
 };
