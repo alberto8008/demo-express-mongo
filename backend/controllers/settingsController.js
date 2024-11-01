@@ -7,7 +7,6 @@ export const getSettings = async (req, res) => {
   }
 
   const result = await getSettingsById(id);
-  console.log("33333333", result);
 
   if (!result) {
     res.status(404).send({ message: "Not found" });

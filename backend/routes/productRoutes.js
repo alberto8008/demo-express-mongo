@@ -1,8 +1,12 @@
 import express from "express";
-import { productSelection } from "../controllers/productsController.js";
+import {
+  getProductSelection,
+  setProductSelection,
+} from "../controllers/productsController.js";
 
 const router = express.Router();
 
-router.route("/select").put(productSelection);
+router.route("/").put(setProductSelection);
+router.route("/").get(getProductSelection);
 
 export default router;
