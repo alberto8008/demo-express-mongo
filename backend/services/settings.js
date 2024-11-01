@@ -7,12 +7,21 @@ export const getSettingsById = async (id) => {
 
 export const setSettingsById = async (id, settings) => {
   try {
-    const setting = new Settings({
-      shopId: id,
-      autoClassifyAll: settings.autoClassifyAll,
-    });
-    return await setting.save();
+    const updatedSetting = await Settings.findOneAndUpdate(
+      { shopId: id },
+      {
+        autoClassifyAll: settings.autoClassifyAll,
+      },
+      {
+        new: true,
+        upsert: true,
+        setDefaultsOnInsert: true,
+      }
+    );
+
+    return updatedSetting;
   } catch (e) {
-    console.log(e);
+    console.error(e);
+    throw new Error("Error updating or creating settings");
   }
 };
