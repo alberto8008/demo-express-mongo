@@ -40,6 +40,11 @@ export const setProductSelection = async (req, res) => {
         .status(400)
         .send({ message: "Invalid or missing variantId in selection" });
     }
+    if (!select.autoClassify || typeof select.autoClassify !== "boolean") {
+      return res
+        .status(400)
+        .send({ message: "Invalid or missing autoClassify in selection" });
+    }
   }
 
   try {
