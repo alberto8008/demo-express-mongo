@@ -18,7 +18,7 @@ export const getSettings = async (req, res) => {
 
 export const setSettings = async (req, res) => {
   const { id, settings } = req.body;
-  if (!id || typeof id !== "string") {
+  if (!id || isNaN(id)) {
     return res.status(400).send({ message: "Invalid or missing ID" });
   }
   if (!settings || typeof settings !== "object") {
